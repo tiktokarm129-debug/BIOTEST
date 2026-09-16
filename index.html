@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color"
+          content="#2563eb">
+
+    <title>BioTest</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <header class="header">
+            <div class="logo">🧪</div>
+
+            <h1>BioTest</h1>
+
+            <p>
+                ระบบวิเคราะห์สีจากการทดสอบทางชีววิทยา
+            </p>
+        </header>
+
+
+        <main class="main">
+
+            <section class="welcome">
+
+                <h2>
+                    เลือกการทดสอบ
+                </h2>
+
+                <p>
+                    เลือกชนิดการทดสอบที่ต้องการวิเคราะห์
+                </p>
+
+            </section>
+
+
+            <section class="test-list">
+
+                <button
+                    class="test-card protein"
+                    onclick="selectTest('biuret')">
+
+                    <div class="test-icon">
+                        🧬
+                    </div>
+
+                    <div class="test-info">
+
+                        <h3>
+                            ตรวจโปรตีน
+                        </h3>
+
+                        <p>
+                            Biuret Test
+                        </p>
+
+                        <span>
+                            วิเคราะห์การเปลี่ยนแปลงสี
+                        </span>
+
+                    </div>
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="test-card benedict"
+                    onclick="selectTest('benedict')">
+
+                    <div class="test-icon">
+                        🍬
+                    </div>
+
+                    <div class="test-info">
+
+                        <h3>
+                            ตรวจน้ำตาล
+                        </h3>
+
+                        <p>
+                            Benedict's Test
+                        </p>
+
+                        <span>
+                            วิเคราะห์การเปลี่ยนแปลงสี
+                        </span>
+
+                    </div>
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+                </button>
+                <button class="test-card calibration"
+        onclick="openCalibration('biuret')">
+
+    <div class="test-icon">🧬</div>
+
+    <div class="test-info">
+        <h3>สอบเทียบ Biuret</h3>
+        <p>Biuret Calibration</p>
+        <span>บันทึกสีมาตรฐานสำหรับโปรตีน</span>
+    </div>
+
+    <div class="arrow">→</div>
+
+</button>
+
+
+<button class="test-card calibration"
+        onclick="openCalibration('benedict')">
+
+    <div class="test-icon">🍬</div>
+
+    <div class="test-info">
+        <h3>สอบเทียบ Benedict</h3>
+        <p>Benedict Calibration</p>
+        <span>บันทึกสีมาตรฐานสำหรับน้ำตาลรีดิวซ์</span>
+    </div>
+
+    <div class="arrow">→</div>
+
+</button>
+
+            </section>
+
+
+            <section class="levels">
+
+                <h3>
+                    ระดับผลการทดสอบ
+                </h3>
+
+                <div class="level-grid">
+
+                    <span>ไม่พบ</span>
+                    <span>0.01</span>
+                    <span>0.05</span>
+                    <span>0.10</span>
+                    <span>0.25</span>
+                    <span>0.50</span>
+                    <span>0.75</span>
+                    <span>1.00</span>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <footer>
+            BioTest Web App
+        </footer>
+        <section id="calibrationPage" class="calibration-page hidden">
+
+    <div class="calibration-header">
+        <button onclick="closeCalibration()" class="back-button">
+            ← กลับ
+        </button>
+
+        <h2>สอบเทียบสี</h2>
+    </div>
+
+    <div class="calibration-content">
+
+        <h3 id="calibrationTestName">
+            การสอบเทียบมาตรฐาน
+        </h3>
+
+        <p>
+            ถ่ายภาพสารมาตรฐานตามระดับที่กำหนด
+        </p>
+
+        <div class="calibration-level">
+            <span>ระดับปัจจุบัน</span>
+
+            <strong id="calibrationLevel">
+                ไม่พบ
+            </strong>
+        </div>
+        <div class="calibration-sample-count">
+
+    ตัวอย่างที่ถ่ายแล้ว:
+    <strong id="calibrationSampleCount">0</strong>
+    รูป
+
+</div>
+
+<button
+    id="saveCalibrationButton"
+    class="capture-button"
+    onclick="saveCalibrationLevel()">
+
+    💾 บันทึกระดับนี้
+
+</button>
+<button
+    id="viewCalibrationButton"
+    class="capture-button"
+    onclick="viewCalibrationData()">
+
+    📊 ดูข้อมูล Calibration
+
+</button>
+<button
+    id="averageCalibrationButton"
+    class="capture-button"
+    onclick="calculateCalibrationAverage()">
+
+    📈 คำนวณค่าเฉลี่ยสี
+
+</button>
+        <div class="calibration-level-list">
+
+    <button onclick="setCalibrationLevel('ไม่พบ')">
+        ไม่พบ
+    </button>
+
+    <button onclick="setCalibrationLevel('0.01')">
+        0.01
+    </button>
+
+    <button onclick="setCalibrationLevel('0.05')">
+        0.05
+    </button>
+
+    <button onclick="setCalibrationLevel('0.10')">
+        0.10
+    </button>
+
+    <button onclick="setCalibrationLevel('0.25')">
+        0.25
+    </button>
+
+    <button onclick="setCalibrationLevel('0.50')">
+        0.50
+    </button>
+
+    <button onclick="setCalibrationLevel('0.75')">
+        0.75
+    </button>
+
+    <button onclick="setCalibrationLevel('1.00')">
+        1.00
+    </button>
+
+</div>
+
+        <button
+            id="calibrationCaptureButton"
+            class="capture-button"
+            onclick="captureCalibration()">
+            📸 ถ่ายภาพมาตรฐาน
+        </button>
+
+    </div>
+
+</section>
+        <section id="cameraPage" class="camera-page hidden">
+
+    <div class="camera-header">
+
+        <button onclick="closeCamera()" class="back-button">
+            ← กลับ
+        </button>
+
+        <h2 id="cameraTitle">
+            ถ่ายภาพตัวอย่าง
+        </h2>
+
+    </div>
+
+
+    <div class="camera-container">
+
+        <video
+            id="cameraVideo"
+            autoplay
+            playsinline>
+        </video>
+
+        <div class="roi-guide">
+
+            <div class="roi-box">
+
+                <span>
+                    วางตัวอย่างในกรอบ
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="camera-controls">
+
+        <button
+            id="captureButton"
+            onclick="captureImage()"
+            class="capture-button">
+
+            📸 ถ่ายภาพ
+
+        </button>
+
+    </div>
+
+
+    <canvas
+        id="captureCanvas"
+        class="hidden">
+    </canvas>
+
+
+    <div
+        id="analysisResult"
+        class="analysis-result hidden">
+
+        <h3>
+            ผลการวิเคราะห์ภาพ
+        </h3>
+
+        <div class="color-preview"
+             id="colorPreview">
+        </div>
+
+        <p>
+            RGB:
+            <span id="rgbValue">-</span>
+        </p>
+
+        <p>
+            HSV:
+            <span id="hsvValue">-</span>
+        </p>
+
+        <p>
+            CIELAB:
+            <span id="labValue">-</span>
+        </p>
+
+    </div>
+
+</section>
+
+    </div>
+
+
+    <script src="camera.js"></script>
+<script src="image-analysis.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
